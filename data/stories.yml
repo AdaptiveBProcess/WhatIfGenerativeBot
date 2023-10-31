@@ -1,0 +1,25 @@
+version: "3.1"
+
+stories:
+
+- story: Greetings
+  steps:
+  - intent: greet
+  - action: utter_greeting
+
+- story: Choose model form
+  steps:
+  - intent: load_model
+  - action: choose_model_form
+  - active_loop: choose_model_form
+  - action: utter_load_successful
+
+- story: Increase demand
+  steps:
+  - intent: increase_demand
+  - action: action_increase_demand
+
+- story: Decrease demand
+  steps:
+  - intent: decrease_demand
+  - action: action_decrease_demand

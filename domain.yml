@@ -1,0 +1,53 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - increase_demand
+  - load_model
+  - decrease_demand
+
+entities:
+- inc_percentage
+
+actions:
+ - action_ask_model
+ - validate_choose_model_form
+ - action_increase_demand
+ - action_decrease_demand
+
+slots:
+  model:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: choose_model_form
+          requested_slot: model
+  comparison_scenario:
+      type: text
+      influence_conversation: false
+      mappings:
+      - type: custom
+  name_scenario:
+      type: text
+      influence_conversation: false
+      mappings:
+      - type: custom 
+
+responses:
+  utter_greeting:
+  - text: Hello! I am Coral, Conversational What If Process Analysis chatbot. Which what-if scenario do you want to create?
+  utter_goodbye:
+  - text: See you later, thanks for use Coral.
+  utter_load_successful:
+  - text: Your model has been loaded successfully. What do you want to do now?
+
+forms:
+  choose_model_form:
+    required_slots:
+      - model
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

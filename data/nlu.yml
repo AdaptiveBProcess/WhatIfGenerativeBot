@@ -1,0 +1,58 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: load_model
+  examples: |
+    - I want to load a model
+    - I want to change my model
+    - Can you please use my model?
+    - I need to load a model 
+
+#I want to create a scenario of 20 increased demand
+- intent: increase_demand
+  examples: |
+    - I want to create a scenario of [20](inc_percentage)% increased demand
+    - I want to increase [10](inc_percentage)% the process demand
+    - I want to see what happens if the process demand increase in [50](inc_percentage)%
+    - I want to create a scenario of [90](inc_percentage)% increased demand
+    - I want to increase [60](inc_percentage)% the process demand
+    - I want to see what happens if the process demand increase in [30](inc_percentage)%
+
+#I want to create a scenario of 25 decreased demand
+- intent: decrease_demand
+  examples: |
+    - I want to create a scenario of [25](inc_percentage)% decreased demand
+    - I want to decrease [30](inc_percentage)% the process demand
+    - I want to see what happens if the process demand decrease in [75](inc_percentage)%
+    - I want to create a scenario of [100](inc_percentage)% decreased demand
+    - I want to decrease [15](inc_percentage)% the process demand
+    - I want to see what happens if the process demand decrease in [5](inc_percentage)%
