@@ -58,3 +58,10 @@ stories:
   - action: remove_resources_form
   - active_loop: remove_resources_form
   - action: action_remove_resources
+
+- story: create working times
+  steps:
+  - intent: create_working_time
+  - action: create_working_time_form
+  - active_loop: create_working_time_form
+  - action: action_create_working_time

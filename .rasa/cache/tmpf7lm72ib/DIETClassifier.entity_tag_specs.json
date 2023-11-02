@@ -1,0 +1,20 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-inc_percentage",
+      "2": "I-inc_percentage",
+      "3": "L-inc_percentage",
+      "4": "U-inc_percentage",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-inc_percentage": 1,
+      "I-inc_percentage": 2,
+      "L-inc_percentage": 3,
+      "U-inc_percentage": 4,
+      "O": 0
+    },
+    "num_tags": 5
+  }
+]

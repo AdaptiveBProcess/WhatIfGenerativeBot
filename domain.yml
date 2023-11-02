@@ -16,7 +16,8 @@ intents:
       use_entities: []
   - remove_resources:
       use_entities: []
-  
+  - create_working_time:
+      use_entities: []  
 entities:
 - inc_percentage
 
@@ -50,6 +51,10 @@ actions:
  - action_remove_resources
  - action_ask_remove_resources_role
  - action_ask_remove_resources_transfer_role
+
+ - validate_create_working_time_form
+ - action_create_working_time
+ - action_ask_create_working_time_resource
 
 slots:
   model:
@@ -185,6 +190,62 @@ slots:
       conditions:
         - active_loop: remove_resources_form
           requested_slot: remove_resources_transfer_role
+  create_working_time_id:
+      type: text
+      influence_conversation: false
+      mappings:
+      - type: from_text
+        conditions:
+          - active_loop: create_working_time_form
+            requested_slot: create_working_time_id
+  create_working_time_name:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: create_working_time_form
+          requested_slot: create_working_time_name
+  create_working_time_from_time:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: create_working_time_form
+          requested_slot: create_working_time_from_time
+  create_working_time_to_time:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: create_working_time_form
+          requested_slot: create_working_time_to_time
+  create_working_time_from_weekday:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: create_working_time_form
+          requested_slot: create_working_time_from_weekday
+  create_working_time_to_weekday:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: create_working_time_form
+          requested_slot: create_working_time_to_weekday
+  create_working_time_resource:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: create_working_time_form
+          requested_slot: create_working_time_resource
 responses:
   utter_greeting:
   - text: Hello! I am Coral, Conversational What If Process Analysis chatbot. Which what-if scenario do you want to create?
@@ -241,6 +302,33 @@ responses:
   utter_wrong_remove_resources_transfer_role:
   - text: Please enter a valid resource name.
 
+  utter_ask_create_working_time_id:
+  - text: Enter the Id for the new timetable.
+  utter_wrong_create_working_time_id:
+  - text: Please enter a valid option for Id.
+  utter_ask_create_working_time_name:
+  - text: Enter the Name for the new timetable.
+  utter_wrong_create_working_time_name:
+  - text: Please enter a valid option for name.
+  utter_ask_create_working_time_from_time:
+  - text: Enter the initial time for the rule (HH:MM:SS)
+  utter_wrong_create_working_time_from_time:
+  - text: Please enter a valid initial time for the rule.
+  utter_ask_create_working_time_to_time:
+  - text: Enter the final time for the rule (HH:MM:SS).
+  utter_wrong_create_working_time_to_time:
+  - text: Please enter a valid final time for the rule.
+  utter_ask_create_working_time_from_weekday:
+  - text: Enter the initial day of week for the rule.
+  utter_wrong_create_working_time_from_weekday:
+  - text: Please enter a valid weekday for the rule.
+  utter_ask_create_working_time_to_weekday:
+  - text: Enter the final day of week for the rule.
+  utter_wrong_create_working_time_to_weekday:
+  - text: Please enter a valid weekday for the rule
+  utter_wrong_create_working_time_resource:
+  - text: Please enter a valid resource name.
+  
 forms:
   choose_model_form:
     required_slots:
@@ -269,6 +357,15 @@ forms:
     required_slots:
       - remove_resources_role
       - remove_resources_transfer_role
+  create_working_time_form:
+    required_slots:
+      - create_working_time_id
+      - create_working_time_name
+      - create_working_time_from_time
+      - create_working_time_to_time
+      - create_working_time_from_weekday
+      - create_working_time_to_weekday
+      - create_working_time_resource
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

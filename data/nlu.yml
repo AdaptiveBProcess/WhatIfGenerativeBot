@@ -88,3 +88,11 @@ nlu:
     - I want to create a scenario where resources are removed
     - I want to see what happens if I remove resources to the process
     - Removing resources
+
+- intent: create_working_time
+  examples: |
+    - What if we create a working times?
+    - I want to create time tables of resources
+    - What if we create a working time table?
+    - What if we create working tables?
+    - Creating new timetables
