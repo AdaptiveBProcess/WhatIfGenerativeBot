@@ -101,4 +101,198 @@ def standarize_metric(value, kpi):
             return value/(60*60*24*7), 'weeks'
     else:
         return value, ''
+def extract_bpmn_resources(model_path, ptt_s, ptt_e):
+    with open(model_path) as file:
+        model= file.read()
+    lines = model.split('\n')
+    start, end = None, None
+    for idx, line in enumerate(lines):
+        if ptt_s in line and start == None:
+            start = idx
+        if ptt_e in line and end == None:
+            end = idx
+        if start != None and end != None:
+            break
+    return '\n'.join(lines[start:end+1])
+def extract_resources(model_path):
+    ptt_s = '<qbp:resources>'
+    ptt_e = '</qbp:resources>'
+    resources = extract_bpmn_resources(model_path, ptt_s, ptt_e).split('\n')
     
+    ptts = ['id','name', 'totalAmount', 'costPerHour', 'timetableId']
+    data = []
+    for line in resources:
+        row = {}
+        for ptt in ptts:
+            ptt_s = r'{}="(.*?)"'.format(ptt)
+            text = re.search(ptt_s, line)
+            if text != None:
+                row[ptt] = text.group(1)
+        if row != {}:
+            data.append(row)
+            
+    df = pd.DataFrame(data)
+    df.columns = ['resourceId', 'resourceName', 'totalAmount', 'costPerHour', 'timetableId']
+    return df    
+def extract_timetables(model_path):
+    ptt_s = '<qbp:timetables>'
+    ptt_e = '</qbp:timetables>'
+    time_tables = extract_bpmn_resources(model_path, ptt_s, ptt_e).split('\n')
+    ptts = ['id','name']
+    data = []
+    for time_table in time_tables:
+        row = {}
+        for ptt in ptts:
+            ptt_s = r'{}="(.*?)"'.format(ptt)
+            text = re.search(ptt_s, time_table)
+            if text != None:
+                row[ptt] = text.group(1)
+        if row != {}:
+            data.append(row)
+    df = pd.DataFrame(data)
+    df.columns = ['timetableId', 'timetableName']
+    return df
+def extract_tasks(model_path):
+    with open(model_path) as file:
+        model= file.read()
+    lines = model.split('\n')
+    tasks = []
+    for line in lines:
+        if 'task id' in line:
+            tasks.append(line)
+    ptts = ['id','name']
+    data = []
+    for task in tasks:
+        row = {}
+        for ptt in ptts:
+            ptt_s = r'{}="(.*?)"'.format(ptt)
+            text = re.search(ptt_s, task)
+            if text != None:
+                row[ptt] = text.group(1)
+        if row != {}:
+            data.append(row)
+    df = pd.DataFrame(data)
+    df.columns = ['elementId', 'taskName']
+    return df
+def extract_elements(model_path):
+    ptt_s = '<qbp:elements>'
+    ptt_e = '</qbp:elements>'
+    elements = extract_bpmn_resources(model_path, ptt_s, ptt_e).split('\n')
+    elements_list = []
+    start, end = None, None
+    for idx, line in enumerate(elements):
+        if '<qbp:element ' in line and start == None:
+            start = idx
+        if '</qbp:element>' in line and end == None:
+            end = idx
+        if start != None and end != None:
+            elements_list.append(elements[start:end+1])
+            start, end = None, None
+    
+    #Patterns next to extracted element
+    ptts_n = ['id','elementId', 'type', 'mean', 'arg1', 'arg2']
+    
+    #Patterns between to extracted element
+    ptts_b = [['<qbp:resourceId>','</qbp:resourceId>'],
+              ['<qbp:timeUnit>', '</qbp:timeUnit>']]
+    
+    data_elements = []
+    for line in elements_list:
+        row = {}
+        for elem in line:
+            for ptt_n in ptts_n:
+                ptt_s = r'{}="(.*?)"'.format(ptt_n)
+                text = re.search(ptt_s, elem)
+                if text != None:
+                    row[ptt_n] = text.group(1)
+            for ptt_b in ptts_b:
+                ptt_s = r'{}(.*){}'.format(ptt_b[0], ptt_b[1])
+                text = re.search(ptt_s, elem.lstrip().rstrip())
+                if text != None:
+                    row[ptt_b[0].split(':')[-1][:-1]] = text.group(1)
+        if row != {}:
+            data_elements.append(row)
+    return pd.DataFrame(data_elements)
+def extract_task_add_info(model_path):
+    
+    with open(model_path) as file:
+        model= file.read()
+    lines = model.split('\n')
+    tasks = []
+    for line in lines:
+        if 'task id' in line:
+            tasks.append(line)
+    ptts = ['id','name']
+    data = []
+    for task in tasks:
+        row = {}
+        for ptt in ptts:
+            ptt_s = r'{}="(.*?)"'.format(ptt)
+            text = re.search(ptt_s, task)
+            if text != None:
+                row[ptt] = text.group(1)
+        if row != {}:
+            data.append(row)
+    df_tasks = pd.DataFrame(data)
+    df_tasks.columns = ['elementId', 'name']    
+    
+    task_dist = []
+    start = None
+    end = None
+    
+    for idx, line in enumerate(lines):
+        if '<qbp:elements>' in line and start == None:
+            start = idx
+        elif '</qbp:elements>' in line and end == None:
+            end = idx
+            task_dist.append(lines[start:end+1])
+            break
+    
+    elements_taks = []
+    start = None
+    end = None
+    
+    for idx, line in enumerate(task_dist[0]):
+        if '<qbp:element ' in line and start == None:
+            start = idx
+        elif '</qbp:element>' in line and end == None:
+            end = idx
+            elements_taks.append(task_dist[0][start:end+1])
+            start, end = None, None
+    
+    ptts = ['id', 'elementId','type','mean', 'arg1', 'arg2', 'timeUnit', 'resourceId']
+    tasks = []
+    for task_elem in elements_taks:
+        row = {}
+        for task_line in task_elem:
+            for ptt in ptts:
+                ptt_s = r'{}="(.*?)"'.format(ptt)
+                text = re.search(ptt_s, task_line)
+                if text != None:
+                    row[ptt] = text.group(1)
+                elif ptt == 'timeUnit':
+                    ptt_s = r'<qbp:timeUnit>(.*?)</qbp:timeUnit>'
+                    text = re.search(ptt_s, task_line)
+                    if text != None:
+                        row[ptt] = text.group(1)
+                elif ptt == 'resourceId':
+                    ptt_s = r'<qbp:resourceId>(.*?)</qbp:resourceId>'
+                    text = re.search(ptt_s, task_line)
+                    if text != None:
+                        row[ptt] = text.group(1)
+        if row != {}:
+            tasks.append(row)
+    
+    df_tasks_dist = pd.DataFrame(tasks)
+    df_tasks_dist[['mean', 'arg1', 'arg2']] = df_tasks_dist[['mean', 'arg1', 'arg2']].astype(float)
+    df_tasks = df_tasks.merge(df_tasks_dist, on='elementId', how='left')
+
+    return df_tasks, task_dist
+
+def extract_scenarios():
+    scenarios = glob('inputs/*/models/*.bpmn')
+
+    available_scenarios = [x for x in scenarios]
+    df_available_scenarios = pd.DataFrame(data = available_scenarios, columns = ['SCENARIOS'])
+
+    return dict(enumerate(list(df_available_scenarios['SCENARIOS']), start=1))

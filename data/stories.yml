@@ -23,3 +23,38 @@ stories:
   steps:
   - intent: decrease_demand
   - action: action_decrease_demand
+
+- story: add resources
+  steps:
+  - intent: add_resources
+  - action: add_resources_form
+  - active_loop: add_resources_form
+  - action: action_add_resources
+
+- story: change resources
+  steps:
+  - intent: change_resources
+  - action: change_resources_form
+  - active_loop: change_resources_form
+  - action: action_change_resources
+
+- story: fast task
+  steps:
+  - intent: fast_task
+  - action: fast_task_form
+  - active_loop: fast_task_form
+  - action: action_fast_task
+
+- story: slow task
+  steps:
+  - intent: slow_task
+  - action: slow_task_form
+  - active_loop: slow_task_form
+  - action: action_slow_task
+
+- story: remove resources
+  steps:
+  - intent: remove_resources
+  - action: remove_resources_form
+  - active_loop: remove_resources_form
+  - action: action_remove_resources

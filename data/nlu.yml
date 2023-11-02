@@ -56,3 +56,35 @@ nlu:
     - I want to create a scenario of [100](inc_percentage)% decreased demand
     - I want to decrease [15](inc_percentage)% the process demand
     - I want to see what happens if the process demand decrease in [5](inc_percentage)%
+
+- intent: add_resources
+  examples: |
+    - I want to add a resource in the process
+    - I want to create a scenario where resources are added
+    - I want to see what happens if I add resources to the process
+    - Adding resources
+
+- intent: change_resources
+  examples: |
+    - I want to change the resources in the process
+    - I want to create a scenario where resources are changed
+    - I want to see what happens if the resources change in the process
+    - Modifying resources
+- intent: fast_task
+  examples: |
+    - What if some task becomes faster?
+    - I want a task to be faster
+    - I want to become faster a task in the process
+
+- intent: slow_task
+  examples: |
+    - What if some task becomes slower?
+    - I want a task to be slower
+    - I want to become slower a task in the process
+
+- intent: remove_resources
+  examples: |
+    - I want to remove a resources in the process
+    - I want to create a scenario where resources are removed
+    - I want to see what happens if I remove resources to the process
+    - Removing resources
