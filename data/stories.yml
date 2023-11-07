@@ -7,6 +7,14 @@ stories:
   - intent: greet
   - action: utter_greeting
 
+- story: Select working mode
+  steps:
+  - intent: work_select
+  - action: action_ask_processing_option
+  - action: processing_option_form
+  - active_loop: processing_option_form
+  - action: utter_ws_successful
+
 - story: Choose model form
   steps:
   - intent: load_model
@@ -14,54 +22,26 @@ stories:
   - active_loop: choose_model_form
   - action: utter_load_successful
 
-- story: Increase demand
+- story: process model with parameters
   steps:
-  - intent: increase_demand
+  - slot_was_set:
+    - option: "Parameter"
+  - intent: increase_demand  
   - action: action_increase_demand
+  - action: utter_goodbye
 
-- story: Decrease demand
+- story: process model with flow
   steps:
-  - intent: decrease_demand
-  - action: action_decrease_demand
+  - slot_was_set:
+    - option: "Flux"
+  - action: action_declarative_action_rules
+  - action: utter_goodbye
 
-- story: add resources
+- story: process model with parameters and flow
   steps:
-  - intent: add_resources
-  - action: add_resources_form
-  - active_loop: add_resources_form
-  - action: action_add_resources
-
-- story: change resources
-  steps:
-  - intent: change_resources
-  - action: change_resources_form
-  - active_loop: change_resources_form
-  - action: action_change_resources
-
-- story: fast task
-  steps:
-  - intent: fast_task
-  - action: fast_task_form
-  - active_loop: fast_task_form
-  - action: action_fast_task
-
-- story: slow task
-  steps:
-  - intent: slow_task
-  - action: slow_task_form
-  - active_loop: slow_task_form
-  - action: action_slow_task
-
-- story: remove resources
-  steps:
-  - intent: remove_resources
-  - action: remove_resources_form
-  - active_loop: remove_resources_form
-  - action: action_remove_resources
-
-- story: create working times
-  steps:
-  - intent: create_working_time
-  - action: create_working_time_form
-  - active_loop: create_working_time_form
-  - action: action_create_working_time
+  - slot_was_set:
+    - option: "Both"
+  - intent: increase_demand  
+  - action: action_increase_demand
+  - action: action_declarative_action_rules
+  - action: utter_goodbye
