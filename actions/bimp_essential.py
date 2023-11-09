@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from glob import glob
 
 def execute_simulator_simple(bimp_path, model_path, csv_output_path):
-    args = ['java', '-jar', bimp_path, model_path, '-csv', csv_output_path]
+    args = ['java', '-jar', bimp_path, model_path, '-csv', csv_output_path, '-mxml']
     subprocess.run(args, stdout=open(os.devnull, 'wb'))
 def modify_bimp_model_instances(path_bimp_model, inc_percentage):
     

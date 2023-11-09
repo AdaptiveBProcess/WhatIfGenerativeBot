@@ -1,0 +1,3 @@
+[submodule "actions/DeclarativeProcessSimulation"]
+	path = actions/DeclarativeProcessSimulation
+	url = https://github.com/AdaptiveBProcess/DeclarativeProcessSimulation.git

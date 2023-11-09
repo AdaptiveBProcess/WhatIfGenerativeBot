@@ -16,32 +16,22 @@ stories:
   - action: utter_ws_successful
 
 - story: Choose model form
-  steps:
+  steps: 
   - intent: load_model
   - action: choose_model_form
   - active_loop: choose_model_form
   - action: utter_load_successful
 
-- story: process model with parameters
+- story: process model inc_demand
   steps:
-  - slot_was_set:
-    - option: "Parameter"
   - intent: increase_demand  
-  - action: action_increase_demand
+  - action: action_select_process
   - action: utter_goodbye
 
-- story: process model with flow
+- story: rule_activation
   steps:
-  - slot_was_set:
-    - option: "Flux"
-  - action: action_declarative_action_rules
-  - action: utter_goodbye
-
-- story: process model with parameters and flow
-  steps:
-  - slot_was_set:
-    - option: "Both"
-  - intent: increase_demand  
-  - action: action_increase_demand
-  - action: action_declarative_action_rules
-  - action: utter_goodbye
+  - intent: rules  
+  - action: action_ask_for_rules
+  - action: rule_form
+  - active_loop: rule_form
+  - action: utter_rs_successful

@@ -44,7 +44,14 @@ nlu:
     - Change way to process model
     - Want to change processing mode 
 
-#I want to create a scenario of 20 increased demand
+- intent: rules
+  examples: |
+    - I want to setup rules
+    - I want to set rules
+    - set rules
+    - setting declarative rules   
+
+
 - intent: increase_demand
   examples: |
     - I want to create a scenario of [20](inc_percentage)% increased demand

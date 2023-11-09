@@ -6,6 +6,10 @@ intents:
   - increase_demand
   - load_model
   - work_select
+  - flow_model
+  - rules:
+      use_entities: []
+
 entities:
 - inc_percentage
 
@@ -17,9 +21,13 @@ actions:
  - validate_processing_option_form
  - action_ask_processing_option
 
+ - validate_rule_form
+ - action_ask_for_rules
+
  - action_increase_demand
 
  - action_declarative_action_rules
+ - action_select_process
 
 slots:
   model:
@@ -42,12 +50,20 @@ slots:
       type: text
       influence_conversation: false
       mappings:
-      - type: custom
+      - type: custom  
   name_scenario:
       type: text
       influence_conversation: false
       mappings:
-      - type: custom 
+      - type: custom
+  rule:
+      type: text
+      influence_conversation: false
+      mappings:
+      - type: from_text
+        conditions:
+          - active_loop: rule_form
+            requested_slot: rule       
 
   
 responses:
@@ -59,6 +75,9 @@ responses:
   - text: Your model has been loaded successfully. What do you want to do now?
   utter_ws_successful:
   - text: Selected your option correctly, please load a model to start.
+  utter_rs_successful:
+  - text: Selected your rule correctly, please continue.
+
 
 forms:
   choose_model_form:
@@ -67,6 +86,9 @@ forms:
   processing_option_form:
     required_slots:
       - option
+  rule_form:
+    required_slots:
+      - rule      
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
