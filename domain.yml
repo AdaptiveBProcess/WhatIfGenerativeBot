@@ -5,6 +5,7 @@ intents:
   - goodbye
   - increase_demand
   - load_model
+  - load_log
   - work_select
   - flow_model
   - rules:
@@ -17,6 +18,9 @@ actions:
 
  - action_ask_model
  - validate_choose_model_form
+
+ - action_ask_log
+ - validate_choose_log_form
 
  - validate_processing_option_form
  - action_ask_processing_option
@@ -38,6 +42,14 @@ slots:
       conditions:
         - active_loop: choose_model_form
           requested_slot: model
+  log:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: choose_log_form
+          requested_slot: log          
   option:
     type: text
     influence_conversation: true
@@ -73,6 +85,8 @@ responses:
   - text: See you later, thanks for use Coral.
   utter_load_successful:
   - text: Your model has been loaded successfully. What do you want to do now?
+  utter_log_load_succesful:
+  - text: Your log has been loaded successfully. Please continue processing your model  
   utter_ws_successful:
   - text: Selected your option correctly, please load a model to start.
   utter_rs_successful:
@@ -83,6 +97,9 @@ forms:
   choose_model_form:
     required_slots:
       - model
+  choose_log_form:
+    required_slots:
+      - log
   processing_option_form:
     required_slots:
       - option

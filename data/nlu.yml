@@ -35,7 +35,21 @@ nlu:
     - I want to load a model
     - I want to change my model
     - Can you please use my model?
-    - I need to load a model 
+    - I need to load a model
+
+- intent: load_log
+  examples: |
+    - I want to load my event log
+    - I want to load my log
+    - load log
+    - I need to load an event log
+
+- intent: flow_model
+  examples: |
+    - I want to process my flow model
+    - I want to process flow
+    - Process flow
+    - I need process flow
 
 - intent: work_select
   examples: |

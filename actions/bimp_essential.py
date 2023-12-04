@@ -4,9 +4,9 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 from glob import glob
-
+#TODO: Refactor to xml tree reader
 def execute_simulator_simple(bimp_path, model_path, csv_output_path):
-    args = ['java', '-jar', bimp_path, model_path, '-csv', csv_output_path, '-mxml']
+    args = ['java', '-jar', bimp_path, model_path, '-csv', csv_output_path]
     subprocess.run(args, stdout=open(os.devnull, 'wb'))
 def modify_bimp_model_instances(path_bimp_model, inc_percentage):
     

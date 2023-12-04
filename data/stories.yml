@@ -22,10 +22,23 @@ stories:
   - active_loop: choose_model_form
   - action: utter_load_successful
 
+- story: Choose log form
+  steps: 
+  - intent: load_log
+  - action: choose_log_form
+  - active_loop: choose_log_form
+  - action: utter_log_load_succesful  
+
 - story: process model inc_demand
   steps:
   - intent: increase_demand  
   - action: action_select_process
+  - action: utter_goodbye
+
+- story: process flow
+  steps:
+  - intent: flow_model  
+  - action: action_declarative_action_rules
   - action: utter_goodbye
 
 - story: rule_activation

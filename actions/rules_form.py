@@ -8,7 +8,6 @@ from rasa_sdk.events import EventType
 from actions.inc_demand import *
 import re
 
-
 class AskForRule(Action):
     def name(self) -> Text:
         return "action_ask_for_rules"
@@ -34,15 +33,15 @@ class ValidateRuleForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate rule_form value."""
         #return value
-        print(f"El valor es {value}")
+        #print(f"El valor es {value}")
         # Check if the rule matches the format: A >> B
-        if re.match(r'^\w+ >> \w+$', value):
-                return {"rule": value}
+        if re.match(r'^.+ >> .+$', value):
+            return {"rule": value}
         # Check if the rule matches the format: A >> * >> B
-        elif re.match(r'^\w+ >> \* >> \w+$', value):
+        elif re.match(r'^.+ >> \* >> .+$', value):
             return {"rule": value}
         # Check if the rule matches the format: A
-        elif re.match(r'^\w+$', value):
+        elif re.match(r'^.+$', value):
             return {"rule": value}
         # Check if the rule matches the format: ^A
         elif re.match(r'^\^\w+$', value):
