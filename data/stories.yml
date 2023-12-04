@@ -32,7 +32,13 @@ stories:
 - story: process model inc_demand
   steps:
   - intent: increase_demand  
-  - action: action_select_process
+  - action: action_increase_demand
+  - action: utter_goodbye
+
+- story: Decrease demand
+  steps:
+  - intent: decrease_demand
+  - action: action_decrease_demand
   - action: utter_goodbye
 
 - story: process flow
@@ -48,3 +54,10 @@ stories:
   - action: rule_form
   - active_loop: rule_form
   - action: utter_rs_successful
+
+- story: add resources
+  steps:
+  - intent: add_resources
+  - action: add_resources_form
+  - active_loop: add_resources_form
+  - action: action_add_resources

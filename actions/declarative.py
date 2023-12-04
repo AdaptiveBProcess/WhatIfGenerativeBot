@@ -39,7 +39,7 @@ class ActionDeclarativeActionRules(Action):
         #TODO: Include all original chatbot rules (Parameters)
         #TODO: UI (reusar)
         #TODO: Ajustar validaciones del declarative
-        #TODO: Mostrar resultados en una grafica
+        #TODO: Mostrar metricas en una grafica
 
         #TODO: Varias reglas para el declarative!!!!
         #TODO: Definir los cambios 

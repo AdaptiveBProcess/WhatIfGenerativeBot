@@ -4,13 +4,15 @@ intents:
   - greet
   - goodbye
   - increase_demand
+  - decrease_demand
   - load_model
   - load_log
   - work_select
   - flow_model
   - rules:
       use_entities: []
-
+  - add_resources:
+      use_entities: []
 entities:
 - inc_percentage
 
@@ -32,6 +34,13 @@ actions:
 
  - action_declarative_action_rules
  - action_select_process
+
+ - action_decrease_demand
+
+ - action_add_resources
+ - validate_add_resources_form
+ - action_ask_add_resource_time_table
+ - action_ask_add_resource_new_role
 
 slots:
   model:
@@ -76,7 +85,46 @@ slots:
         conditions:
           - active_loop: rule_form
             requested_slot: rule       
-
+  add_resource_name:
+      type: text
+      influence_conversation: false
+      mappings:
+      - type: from_text
+        conditions:
+          - active_loop: add_resources_form
+            requested_slot: add_resource_name
+  add_resource_amount:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: add_resources_form
+          requested_slot: add_resource_amount
+  add_resource_cost:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: add_resources_form
+          requested_slot: add_resource_cost
+  add_resource_time_table:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: add_resources_form
+          requested_slot: add_resource_time_table
+  add_resource_new_role:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: add_resources_form
+          requested_slot: add_resource_new_role
   
 responses:
   utter_greeting:
@@ -92,6 +140,22 @@ responses:
   utter_rs_successful:
   - text: Selected your rule correctly, please continue.
 
+  utter_ask_add_resource_name:
+  - text: Indicate the name of the resource
+  utter_ask_add_resource_amount:
+  - text: Indicate the number of resources
+  utter_ask_add_resource_cost:
+  - text: Indicate the cost per hour of the resource
+  utter_wrong_add_resource_name:
+  - text: Please enter a name that is not currently a role name.
+  utter_wrong_add_resource_time_table:
+  - text: Please enter a valid option for timetable for the new role.
+  utter_wrong_add_resource_amount:
+  - text: Please enter a valid option for number of resources.
+  utter_wrong_add_resource_cost:
+  - text: Please enter a valid option for resource cost per hour.
+  utter_wrong_add_resource_new_role:
+  - text: Please enter a valid option for the assigning of new role.
 
 forms:
   choose_model_form:
@@ -105,7 +169,14 @@ forms:
       - option
   rule_form:
     required_slots:
-      - rule      
+      - rule
+  add_resources_form:
+    required_slots:
+      - add_resource_name
+      - add_resource_amount
+      - add_resource_cost
+      - add_resource_time_table
+      - add_resource_new_role            
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
