@@ -24,12 +24,11 @@ class ActionIncreaseDemand(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:      
         model_path = tracker.get_slot("model")
-        option_selected = tracker.get_slot("option")
-        print(option_selected)
         inc_percentage = float(next(tracker.get_latest_entity_values("inc_percentage")))
         output_message,org_message, new_model_path, sce_name=increase_demand(inc_percentage,model_path)
         dispatcher.utter_message(text=org_message)
         dispatcher.utter_message(output_message)
+        option_selected = tracker.get_slot("option")
         if(option_selected == "Both"):
             dir_path = 'inputs/demand/models/'
             files = glob.glob(dir_path + '*')
@@ -38,16 +37,10 @@ class ActionIncreaseDemand(Action):
             target_path_files = 'declarative/DeclarativeProcessSimulation/GenerativeLSTM/input_files/'
             shutil.copy(source_path, target_path)
             shutil.copy(source_path, target_path_files)
-            # new_name = os.path.basename(source_path).split('_')[0] + '.bpmn'
-            # if os.path.exists(target_path + new_name):
-            #     os.remove(target_path + new_name)
-            # if os.path.exists(target_path_files + new_name):    
-            #     os.remove(target_path_files + new_name)
-            #os.rename(target_path + os.path.basename(source_path), target_path + new_name)
-            #os.rename(target_path_files + os.path.basename(source_path), target_path_files + new_name)
             return [SlotSet("comparison_scenario", new_model_path),
                     SlotSet("name_scenario", sce_name),
                     FollowupAction('action_declarative_action_rules')]
+        
         return [SlotSet("comparison_scenario", new_model_path),
                 SlotSet("name_scenario", sce_name)]    
 def increase_demand(inc_percentage,model_path):
