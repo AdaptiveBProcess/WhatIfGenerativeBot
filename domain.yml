@@ -22,7 +22,13 @@ intents:
   - remove_resources:
       use_entities: []
   - create_working_time:
-      use_entities: []        
+      use_entities: []
+  - modify_working_time:
+      use_entities: []
+  - automate_task:
+      use_entities: []
+  - compare_scenarios:
+      use_entities: []              
 entities:
 - inc_percentage
 
@@ -72,6 +78,18 @@ actions:
  - validate_create_working_time_form
  - action_create_working_time
  - action_ask_create_working_time_resource 
+
+ - validate_modify_working_time_form
+ - action_modify_working_time
+ - action_ask_modify_working_time_name
+
+ - validate_automate_task_form
+ - action_automate_task
+ - action_ask_automate_task_name
+
+ - validate_compare_scenarios_form
+ - action_compare_scenarios
+ - action_ask_compared_scenarios
 
 slots:
   model:
@@ -284,6 +302,76 @@ slots:
       conditions:
         - active_loop: create_working_time_form
           requested_slot: create_working_time_resource
+
+  modify_working_time_name:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: modify_working_time_form
+          requested_slot: modify_working_time_name
+  modify_working_time_from_time:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: modify_working_time_form
+          requested_slot: modify_working_time_from_time
+  modify_working_time_to_time:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: modify_working_time_form
+          requested_slot: modify_working_time_to_time
+  modify_working_time_from_weekday:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: modify_working_time_form
+          requested_slot: modify_working_time_from_weekday
+  modify_working_time_to_weekday:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: modify_working_time_form
+          requested_slot: modify_working_time_to_weekday
+  automate_task_name:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: automate_task_form
+          requested_slot: automate_task_name
+  automate_task_percentage:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: automate_task_form
+          requested_slot: automate_task_percentage
+  compared_scenarios:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: compare_scenarios_form
+          requested_slot: compared_scenarios
+  compared_scenario_names:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: custom          
 responses:
   utter_greeting:
   - text: Hello! I am Coral, Conversational What If Process Analysis chatbot. Which what-if scenario do you want to create?
@@ -371,6 +459,35 @@ responses:
   - text: Please enter a valid weekday for the rule
   utter_wrong_create_working_time_resource:
   - text: Please enter a valid resource name.
+
+  utter_wrong_modify_working_time_name:
+  - text: Please enter a valid option for name.
+  utter_ask_modify_working_time_from_time:
+  - text: Enter the initial time for the rule (HH:MM:SS)
+  utter_wrong_modify_working_time_from_time:
+  - text: Please enter a valid initial time for the rule.
+  utter_ask_modify_working_time_to_time:
+  - text: Enter the final time for the rule (HH:MM:SS).
+  utter_wrong_modify_working_time_to_time:
+  - text: Please enter a valid final time for the rule.
+  utter_ask_modify_working_time_from_weekday:
+  - text: Enter the initial day of week for the rule.
+  utter_wrong_modify_working_time_from_weekday:
+  - text: Please enter a valid weekday for the rule.
+  utter_ask_modify_working_time_to_weekday:
+  - text: Enter the final day of week for the rule.
+  utter_wrong_modify_working_time_to_weekday:
+  - text: Please enter a valid weekday for the rule
+
+  utter_wrong_automate_task_name:
+  - text: Please enter a valid task name.
+  utter_ask_automate_task_percentage:
+  - text: What is the percentage of automation?
+  utter_wrong_automate_task_percentage:
+  - text: Please enter a valid option for percentage of automation.
+
+  utter_wrong_compared_scenarios:
+  - text: Please enter a valid id for comparison scenarios.
 forms:
   choose_model_form:
     required_slots:
@@ -416,7 +533,21 @@ forms:
       - create_working_time_to_time
       - create_working_time_from_weekday
       - create_working_time_to_weekday
-      - create_working_time_resource                  
+      - create_working_time_resource
+  modify_working_time_form:
+    required_slots:
+      - modify_working_time_name
+      - modify_working_time_from_time
+      - modify_working_time_to_time
+      - modify_working_time_from_weekday
+      - modify_working_time_to_weekday
+  automate_task_form:
+    required_slots:
+      - automate_task_name
+      - automate_task_percentage
+  compare_scenarios_form:
+    required_slots:
+      - compared_scenarios                  
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
