@@ -22,6 +22,12 @@ stories:
   - active_loop: choose_model_form
   - action: utter_load_successful
 
+- story: Train model
+  steps: 
+  - intent: train_model
+  - action: action_train_model
+  - action: utter_goodbye
+
 - story: Choose log form
   steps: 
   - intent: load_log

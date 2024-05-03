@@ -58,6 +58,13 @@ nlu:
     - Change way to process model
     - Want to change processing mode 
 
+- intent: train_model
+  examples: |
+    - I want to train flow model
+    - I want to train my model
+    - Train model
+    - I need to train my model
+    
 - intent: rules
   examples: |
     - I want to setup rules

@@ -22,7 +22,7 @@ class ActionDeclarativeActionRules(Action):
         rule=tracker.get_slot("rule")
         if option_selected == "Flux":
             model=tracker.get_slot("model")
-            dv.ChangeModelNameDeclarative()
+            dv.ChangeModelNameDeclarative(model)
         elif option_selected == "Both":
             model=tracker.get_slot("comparison_scenario")
         else:

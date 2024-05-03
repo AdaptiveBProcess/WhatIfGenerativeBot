@@ -21,7 +21,7 @@ def ChangeModelName(model):
     #model='PurchasingExample.xes'
     #print(model)
     file_to_modify = 'declarative\DeclarativeProcessSimulation\dg_prediction.py'
-    line_number=141
+    line_number=139
     with fileinput.FileInput(file_to_modify, inplace=True) as file:
             for i, line in enumerate(file, start=1):
                 if i == line_number:
@@ -32,7 +32,7 @@ def ChangeModelNameDeclarative(model):
     #model='PurchasingExample.xes'
     #print(model)
     file_to_modify = 'declarative\DeclarativeProcessSimulation\dg_prediction.py'
-    line_number=114
+    line_number=112
     with fileinput.FileInput(file_to_modify, inplace=True) as file:
             for i, line in enumerate(file, start=1):
                 if i == line_number:

@@ -9,6 +9,7 @@ intents:
   - load_log
   - work_select
   - flow_model
+  - train_model
   - rules:
       use_entities: []
   - add_resources:
@@ -33,6 +34,7 @@ entities:
 - inc_percentage
 
 actions:
+ - action_train_model
 
  - action_ask_model
  - validate_choose_model_form
