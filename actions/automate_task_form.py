@@ -1,9 +1,9 @@
+# This file contains the code for the form used to automate a task in the Rasa chatbot.
 from dis import dis
-from typing import Any, Text, Dict, List, Union
+from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
 from typing import Dict, Text, List
 from rasa_sdk.events import EventType
 from actions.inc_demand import *
@@ -70,25 +70,6 @@ class ValidateAutomateTaskForm(FormValidationAction):
             # validation failed, set this slot to None, meaning the
             # user will be asked for the slot again
             return {"automate_task_percentage": None}
-
-   
-class AutomateTaskForm(FormAction):
-
-    def name(self):
-        """Unique identifier of the form"""
-        return "automate_task_form"
-
-    def required_slots(tracker: Tracker) -> List[Text]:
-        """A list of required slots that the form has to fill"""
-
-        return ["automate_task_name","automate_task_percentage"]
-
-    def submit(self):
-        """
-        Define what the form has to do
-        after all required slots are filled
-        """
-        return []
 
 class AskForAutomateTaskName(Action):
     def name(self) -> Text:

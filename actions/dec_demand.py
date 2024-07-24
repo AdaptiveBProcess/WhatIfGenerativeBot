@@ -1,10 +1,9 @@
+# This file contains the action for decreasing demand in the model
 from . import bimp_essential as esc
-from dis import dis
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
-from rasa_sdk.events import AllSlotsReset
 from typing import Dict, Text, List
 from rasa_sdk.events import EventType
 from actions import *

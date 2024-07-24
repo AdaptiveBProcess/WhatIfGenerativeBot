@@ -2,7 +2,6 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
 from typing import Dict, Text, List
 from actions.inc_demand import *
 
@@ -83,22 +82,3 @@ class ValidateChangeResourcesForm(FormValidationAction):
             dispatcher.utter_message(response="utter_wrong_change_resources_new_cost")
             # validation failed, set slot to None
             return {"change_resources_new_cost": None}
-
-class ChangeResourcesForm(FormAction):
-
-    def name(self):
-        """Unique identifier of the form"""
-        return "change_resources_form"
-
-    def required_slots(tracker: Tracker) -> List[Text]:
-        """A list of required slots that the form has to fill"""
-
-        return ["change_resources_role_modify", "change_resources_new_amount", "change_resources_new_cost"]
-
-    def submit(self):
-        """
-        Define what the form has to do
-        after all required slots are filled
-        """
-
-        return []

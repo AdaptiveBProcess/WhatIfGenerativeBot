@@ -1,9 +1,9 @@
+# this file contains the form for comparing scenarios
 from dis import dis
 from typing import Any, Text, Dict, List, Union
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
 from typing import Dict, Text, List
 from rasa_sdk.events import EventType
 from actions.inc_demand import *
@@ -53,24 +53,6 @@ class ValidateComparisonScenariosForm(FormValidationAction):
                 for scenario in scenarios_names.keys():
                     dispatcher.utter_message(json.dumps({scenario: scenarios_names[scenario].split('\\')[-1].split('.')[0]}))
                 return {"compared_scenario_names": None}
-
-class CompareScenariosForm(FormAction):
-
-    def name(self):
-        """Unique identifier of the form"""
-        return "compare_scenarios_form"
-
-    def required_slots(tracker: Tracker) -> List[Text]:
-        """A list of required slots that the form has to fill"""
-
-        return ["compared_scenarios"]
-
-    def submit(self):
-        """
-        Define what the form has to do
-        after all required slots are filled
-        """
-        return []
 
 class AskForComparedScenarios(Action):
     def name(self) -> Text:

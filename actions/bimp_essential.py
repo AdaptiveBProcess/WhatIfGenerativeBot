@@ -1,8 +1,8 @@
+# Description: This file contains the essential functions to interact with the BIMP simulator.
 import subprocess
 import re
 import pandas as pd
 import os
-import matplotlib.pyplot as plt
 from glob import glob
 #TODO: Refactor to xml tree reader
 def execute_simulator_simple(bimp_path, model_path, csv_output_path):

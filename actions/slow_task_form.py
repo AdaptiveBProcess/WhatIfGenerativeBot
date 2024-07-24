@@ -1,9 +1,8 @@
-from dis import dis
+# This file contains the code for the slow task form
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
 from typing import Dict, Text, List
 from rasa_sdk.events import EventType
 from actions.inc_demand import *
@@ -85,23 +84,4 @@ class AskForSlowTaskName(Action):
         for task in df_tasks['taskName']:
             dispatcher.utter_message(text=task)
         
-        return []
-
-class SlowTaskForm(FormAction):
-
-    def name(self):
-        """Unique identifier of the form"""
-        return "slow_task_form"
-
-    def required_slots(tracker: Tracker) -> List[Text]:
-        """A list of required slots that the form has to fill"""
-
-        return ["slow_task_name", "slow_task_percentage"]
-
-    def submit(self):
-        """
-        Define what the form has to do
-        after all required slots are filled
-        """
-
         return []

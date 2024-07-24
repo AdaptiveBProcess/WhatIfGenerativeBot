@@ -1,27 +1,9 @@
 from dis import dis
-from typing import Any, Text, Dict, List, Union
+from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
-from rasa_sdk.events import SlotSet
-from rasa_sdk.events import AllSlotsReset
 from typing import Dict, Text, List
-from rasa_sdk.events import EventType
 from actions.inc_demand import *
-
-
-import numpy as np
-import pandas as pd
-import re
-from glob import glob
-import string
-import random
-import uuid
-from datetime import datetime
-import time
-import json
-import os
 
 class ActionSelectProcess(Action):
     """

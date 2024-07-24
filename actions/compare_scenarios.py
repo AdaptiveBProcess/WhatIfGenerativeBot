@@ -1,18 +1,10 @@
-from dis import dis
-from typing import Any, Text, Dict, List, Union
+# This file contains the action that compares the scenarios selected by the user.
+from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
-from rasa_sdk.events import AllSlotsReset
 from typing import Dict, Text, List
-from rasa_sdk.events import EventType
 from actions.inc_demand import *
-import glob
-import os
-import shutil
-import numpy as np
-import uuid
-import pandas as pd
 class CompareScenarios(Action):
 
     def name(self) -> Text:

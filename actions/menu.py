@@ -2,7 +2,6 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
 from typing import Dict, Text, List
 from rasa_sdk.events import EventType
 from actions.inc_demand import *
@@ -68,13 +67,3 @@ class ValidateProcessingOptionForm(FormValidationAction):
         except:
             return {"option": value}
 
-class ProcessingOptionForm(FormAction):
-
-    def name(self):
-        return "processing_option_form"
-
-    def required_slots(tracker: Tracker) -> List[Text]:
-        return ["option"]
-
-    def submit(self):
-        return []
