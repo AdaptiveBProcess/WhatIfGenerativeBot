@@ -1,4 +1,4 @@
-from dis import dis
+# This file contains the code for the action that removes a resource from the model and executes the simulation for the new model.
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher

@@ -1,3 +1,4 @@
+# This file contains the action that creates a new working time in the BPMN model and executes the simulation for the new scenario.
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher

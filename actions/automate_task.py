@@ -1,18 +1,10 @@
-from dis import dis
-from typing import Any, Text, Dict, List, Union
+# This file contains the code for the action automate_task. This action is used to automate a task in the BPMN model.
+from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
-from rasa_sdk.events import AllSlotsReset
 from typing import Dict, Text, List
-from rasa_sdk.events import EventType
 from actions.inc_demand import *
-import glob
-import os
-import shutil
-import numpy as np
-import uuid
-import pandas as pd
 class ActionAutomateTask(Action):
     def name(self) -> Text:
         return "action_automate_task"

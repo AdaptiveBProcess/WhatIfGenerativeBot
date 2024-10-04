@@ -1,9 +1,8 @@
-from dis import dis
-from typing import Any, Text, Dict, List, Union
+# Description: Rasa form for adding resources to the model.
+from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
 from typing import Dict, Text, List
 from rasa_sdk.events import EventType
 from actions.inc_demand import *
@@ -149,25 +148,6 @@ class ValidateAddResourcesForm(FormValidationAction):
             # validation failed, set slot to None
             return {"add_resource_cost": None}
 
-class AddResourcesForm(FormAction):
-
-    def name(self):
-        """Unique identifier of the form"""
-        return "add_resources_form"
-
-    def required_slots(tracker: Tracker) -> List[Text]:
-        """A list of required slots that the form has to fill"""
-
-        return ["add_resource_name", "add_resource_amount", "add_resource_cost",
-                "add_resource_time_table", "add_resource_new_role"]
-
-    def submit(self):
-        """
-        Define what the form has to do
-        after all required slots are filled
-        """
-        return []
-    
 class AskForAddResourceTimeTable(Action):
     def name(self) -> Text:
         return "action_ask_add_resource_time_table"

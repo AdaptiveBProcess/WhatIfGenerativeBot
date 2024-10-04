@@ -2,7 +2,6 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
 from typing import Dict, Text, List
 from rasa_sdk.events import EventType
 from actions.inc_demand import *
@@ -51,14 +50,3 @@ class ValidateRuleForm(FormValidationAction):
             # validation failed, set this slot to None, meaning the
             # user will be asked for the slot again
             return {"rule": None}
-
-class RuleForm(FormAction):
-    def name(self):
-        return "rule_form"
-
-    @staticmethod
-    def required_slots(tracker: Tracker) -> List[Text]:
-        return ["rule"]
-
-    def submit(self):
-        return []

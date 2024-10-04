@@ -1,9 +1,8 @@
-from dis import dis
+# Description: This file contains the code for the action that asks the user to choose a log file from the list of available logs.
 from typing import Any, Text, Dict, List, Union
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
 from rasa_sdk.events import SlotSet
 from rasa_sdk.events import AllSlotsReset
 from typing import Dict, Text, List
@@ -53,33 +52,22 @@ class ValidateChooseLogForm(FormValidationAction):
 
     def validate_log(
         self,
-        value: Text,
+        slot_value: Text,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        """Validate compared_scenarios value."""
+        """Validate log value"""
 
         logs = self.logs_db()
         try:
-            if int(value) in logs.keys():
-                return {"log": logs[int(value)]}
+            if int(slot_value) in logs.keys():
+                dispatcher.utter_message(text='Loaded model selected: ' + logs[int(slot_value)])
+                return {"log": logs[int(slot_value)]}
             else:
                 dispatcher.utter_message(text='Please enter a valid option for log')
                 for key in logs.keys():
                     dispatcher.utter_message(text=json.dumps({key : logs[key]}))
                 return {"log": None}
         except:
-            return {"log": value}
-
-class ChooselogForm(FormAction):
-
-    def name(self):
-        return "choose_log_form"
-
-    def required_slots(tracker: Tracker) -> List[Text]:
-        return ["log"]
-
-
-    def submit(self):
-        return []
+            return {"log": slot_value}

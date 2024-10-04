@@ -1,8 +1,8 @@
+# Description: Rasa form action for creating a new working time in the model.
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
 from typing import Dict, Text, List
 from rasa_sdk.events import EventType
 from actions.inc_demand import *
@@ -174,26 +174,6 @@ class ValidateCreateWorkingTimeForm(FormValidationAction):
             # validation failed, set this slot to None, meaning the
             # user will be asked for the slot again
             return {"create_working_time_to_weekday": None}
-
-class CreateWorkingTimeForm(FormAction):
-
-    def name(self):
-        """Unique identifier of the form"""
-        return "create_working_time_form"
-
-    def required_slots(tracker: Tracker) -> List[Text]:
-        """A list of required slots that the form has to fill"""
-
-        return ["create_working_time_id", "create_working_time_name", "create_working_time_from_time", "create_working_time_to_time", 
-        "create_working_time_from_weekday", "create_working_time_to_weekday", "create_working_time_resource"]
-
-    def submit(self):
-        """
-        Define what the form has to do
-        after all required slots are filled
-        """
-
-        return []
 
 class AskForCreateWorkingTimeResource(Action):
     def name(self) -> Text:

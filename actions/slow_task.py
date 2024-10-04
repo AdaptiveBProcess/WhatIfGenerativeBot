@@ -3,9 +3,7 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
-from rasa_sdk.events import AllSlotsReset
-from typing import Dict, Text, List
-from rasa_sdk.events import EventType
+from typing import Dict, Text, List 
 from actions.inc_demand import *
 import glob
 import os

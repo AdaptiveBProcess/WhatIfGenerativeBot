@@ -1,11 +1,8 @@
-from dis import dis
+# Description: Rasa form action for removing resources from the model.
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
-from rasa_core_sdk.forms import FormAction
-from rasa_sdk.events import SlotSet
-from rasa_sdk.events import AllSlotsReset
 from typing import Dict, Text, List
 from rasa_sdk.events import EventType
 from actions.inc_demand import *
@@ -68,25 +65,6 @@ class ValidateRemoveResourceskForm(FormValidationAction):
             # validation failed, set this slot to None, meaning the
             # user will be asked for the slot again
             return {"remove_resources_transfer_role": None}
-
-class RemoveResourcesForm(FormAction):
-
-    def name(self):
-        """Unique identifier of the form"""
-        return "remove_resources_form"
-
-    def required_slots(tracker: Tracker) -> List[Text]:
-        """A list of required slots that the form has to fill"""
-
-        return ["remove_resources_role", "remove_resources_transfer_role"]
-
-    def submit(self):
-        """
-        Define what the form has to do
-        after all required slots are filled
-        """
-
-        return []
 
 class AskForRemoveResourceRole(Action):
     def name(self) -> Text:

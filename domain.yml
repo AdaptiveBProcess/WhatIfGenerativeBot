@@ -9,7 +9,6 @@ intents:
   - load_log
   - work_select
   - flow_model
-  - train_model
   - rules:
       use_entities: []
   - add_resources:
@@ -34,7 +33,6 @@ entities:
 - inc_percentage
 
 actions:
- - action_train_model
 
  - action_ask_model
  - validate_choose_model_form
@@ -549,7 +547,8 @@ forms:
       - automate_task_percentage
   compare_scenarios_form:
     required_slots:
-      - compared_scenarios                  
+      - compared_scenarios     
+                   
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

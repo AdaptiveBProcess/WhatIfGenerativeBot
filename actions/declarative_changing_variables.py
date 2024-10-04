@@ -1,3 +1,4 @@
+# This script is used to change the variables in the declarative process simulation
 import os
 import glob
 import sys
