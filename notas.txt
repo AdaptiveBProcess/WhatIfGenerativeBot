@@ -1,0 +1,15 @@
+1. Ajustar chatbot para tener modulos y servicios independientes
+    1.1 Hacer la generacion del canonico dentro del chatbot
+        1.1.1 Clonar Simod +
+        1.1.2 Clonar SimodR +
+        1.1.3 Crear codigo para llamar al submodulo Simod dentro de la misma carpeta y generar el canónico
+        1.1.4 Añadirlo a una acción dentro del chatbot
+        1.1.5 Crear NLU, Historias y actualizar dominio
+        1.1.6 Probar la función
+    1.2 Incluir SimodR dentro del chatbot
+    1.3 Desacoplar del Declarative : GenerativeLSTM Simod
+        1.3.1 Rules.ini es del Declarative
+    1.4  Declarative, Simod, GenerativeLSTM implementados en el chatbot
+
+2. Hacer un diagrama de la arquitectura y describir como quedaron los diferentes flujos de integracion conversacionales
+

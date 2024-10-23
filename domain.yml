@@ -9,6 +9,7 @@ intents:
   - load_log
   - work_select
   - flow_model
+  - generate_canonical
   - rules:
       use_entities: []
   - add_resources:
@@ -33,6 +34,7 @@ entities:
 - inc_percentage
 
 actions:
+ - action_generate_canonical
 
  - action_ask_model
  - validate_choose_model_form

@@ -118,3 +118,9 @@ stories:
   - active_loop: compare_scenarios_form
   - action: action_compare_scenarios
   - action: utter_goodbye
+
+- story: Generate canonical
+  steps:
+    - intent: generate_canonical
+    - action: action_generate_canonical
+    - action: utter_goodbye

@@ -143,3 +143,11 @@ nlu:
     - I want to compare some scenarios created
     - Compare some of the scenarios generated
     - Compare generated models
+
+- intent: generate_canonical
+  examples: |
+    - I want to generate a canonical model
+    - Generate canonical model
+    - Create a canonical model
+    - I need to generate a canonical model
+    - Can you generate a canonical model?
