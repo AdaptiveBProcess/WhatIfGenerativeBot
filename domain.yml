@@ -10,6 +10,9 @@ intents:
   - work_select
   - flow_model
   - generate_canonical
+  - generate_config_file
+  - get_canonical
+  - run_SimodR
   - rules:
       use_entities: []
   - add_resources:
@@ -34,7 +37,12 @@ entities:
 - inc_percentage
 
 actions:
+
+ - action_run_SimodR
+ 
+ - action_generate_config_file
  - action_generate_canonical
+ - action_get_canonical
 
  - action_ask_model
  - validate_choose_model_form
@@ -373,7 +381,13 @@ slots:
     type: list
     influence_conversation: false
     mappings:
-    - type: custom          
+    - type: custom
+  destination_path:
+      type: text
+      influence_conversation: false
+      mappings:
+      - type: custom 
+
 responses:
   utter_greeting:
   - text: Hello! I am Coral, Conversational What If Process Analysis chatbot. Which what-if scenario do you want to create?

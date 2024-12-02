@@ -151,3 +151,26 @@ nlu:
     - Create a canonical model
     - I need to generate a canonical model
     - Can you generate a canonical model?
+  
+- intent: generate_config_file
+  examples: |
+    - I want to generate a config file for Simod
+    - Generate Simod config file
+    - Create a config file for Simod
+    - I need to generate a Simod config file
+    - Can you generate a config file for Simod?
+
+- intent: get_canonical
+  examples: |
+    - I want to get the canonical model
+    - Get canonical model
+    - Retrieve the canonical model
+    - Can you get the canonical model?
+
+- intent: run_SimodR
+  examples: |
+    - I want to run SimodR
+    - Run SimodR
+    - Execute SimodR
+    - I need to run SimodR
+    - Can you run SimodR?
