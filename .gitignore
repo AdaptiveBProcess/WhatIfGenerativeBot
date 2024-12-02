@@ -1,3 +1,4 @@
+.conda/
 .rasa/
 .vscode/
 actions/__pycache__/

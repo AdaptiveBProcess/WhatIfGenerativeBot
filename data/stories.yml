@@ -118,3 +118,27 @@ stories:
   - active_loop: compare_scenarios_form
   - action: action_compare_scenarios
   - action: utter_goodbye
+
+- story: Generate canonical
+  steps:
+    - intent: generate_canonical
+    - action: action_generate_canonical
+    - action: utter_goodbye
+
+- story: Generate config file
+  steps:
+    - intent: generate_config_file
+    - action: action_generate_config_file
+    - action: utter_goodbye
+
+- story: Get canonical
+  steps:
+    - intent: get_canonical
+    - action: action_get_canonical
+    - action: utter_goodbye
+
+- story: SimodR
+  steps:
+    - intent: run_SimodR
+    - action: action_run_SimodR
+    - action: utter_goodbye

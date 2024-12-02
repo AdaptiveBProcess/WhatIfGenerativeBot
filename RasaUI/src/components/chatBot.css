@@ -1,55 +1,75 @@
-/***************************************************************************************
-*    Title: Rasa-Chatbot-with-React-JS-Interface
-*    Author: Shreyas Fegade
-*    Date: 2022
-*    Code version: 1.0
-*    Availability: https://github.com/smfcoder/Rasa-Chatbot-with-React-JS-Interface
-*
-***************************************************************************************/
-
-.circleBtn{
-    height:55px;
-    width:55px;
-    border-radius:  50%;
+.chatbot {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Set width to 100% */
+    height: 100vh; /* Set height to 100vh */
+    margin: 0; /* Remove margin */
+  }
+.chatbot-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+.chatbot-input {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to the left */
+  }
+.circleBtn {
+    height: 55px;
+    width: 55px;
+    border-radius: 60%;
     margin: 5px;
-    border: none;
-    background-color: rgb(11, 252, 31);
-
+    border: 1px solid #000000; /* Added border */
+    background-color: #ffffff; /* Updated button color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
-.msginp{
-    width:100%;
-    height:55px;
-    border-radius: 50px 50px 50px 50px;
-    margin-top: 5px;
-    margin-left: 5px;
-    border: none;
+.msginp {
+    flex-grow: 1;
+    width: 100%; /* Adjusted width */
+    height: 40px; /* Reduced height */
+    border-radius: 20px; /* Adjusted border-radius */
+    margin-right: 500px; /* Adjusted margin */
+    border: 1px solid #ccc; /* Added border */
     padding-left: 10px;
-
+    font-size: 14px; /* Adjusted font size */
 }
 
-.cola{
-    height:65px;
-    width:65px;
-    padding-left: 0px;
+.cola {
+    height: 65px;
+    width: 65px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
-.msgalignend{
+
+.msgalignend {
     display: flex;
     justify-content: flex-end;
-    
 }
-.msgalignstart{
+
+.msgalignstart {
     display: flex;
     justify-content: flex-start;
     min-height: 5px;
-    
 }
 
-.botmsg{
-    background-color: rgb(205, 173, 241);
+.botmsg {
+    background-color: #1409e6; /* Updated background color */
     padding-left: 15px;
     padding-right: 15px;
-    height:auto;
+    height: auto;
     min-height: 45px;
     padding-top: 6px;
     padding-bottom: 4px;
@@ -57,60 +77,58 @@
     max-width: 20rem;
 }
 
-.usermsg{
-    background-color: rgb(235, 220, 252);
+.usermsg {
+    background-color: #1c0adc; /* Updated background color */
     padding-left: 15px;
     padding-right: 15px;
-    height:auto;
+    height: auto;
     min-height: 45px;
     padding-top: 6px;
     padding-bottom: 4px;
     border-radius: 25px;
     max-width: 20rem;
-    
 }
 
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
-    border-radius: 10px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(140, 27, 185); 
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #b909e6; 
-  }
+}
 
-.botIcon{
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #4a90e2; /* Updated scrollbar color */
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #357ab8; /* Darker shade for hover effect */
+}
+
+.botIcon {
     font-size: 45px;
-    border : 1px solid black;
+    border: 1px solid black;
     border-radius: 50px;
     margin-left: 5px;
     margin-right: 5px;
     padding: 5px;
 }
 
-.userIcon{
+.userIcon {
     font-size: 40px;
-    border : 1px solid black;
+    border: 1px solid black;
     border-radius: 50px;
     margin-left: 5px;
     margin-right: 5px;
     padding: 5px;
-
 }
 
-.sendBtn{
-    font-size:25px;
+.sendBtn {
+    font-size: 25px;
 }
