@@ -1,6 +1,3 @@
-[submodule "declarative/DeclarativeProcessSimulation"]
-	path = declarative/DeclarativeProcessSimulation
-	url = https://github.com/AdaptiveBProcess/DeclarativeProcessSimulation.git
 [submodule "SimodR"]
 	path = SimodR
 	url = https://github.com/AdaptiveBProcess/SimodR.git
