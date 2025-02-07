@@ -32,7 +32,7 @@ class AskForLog(Action):
         
         dispatcher.utter_message(text="Select a log")
 
-        logs = {idx: x for idx, x in enumerate(glob('inputs/*.csv') + glob('inputs/*.csv.gz'), start=1)}
+        logs = {idx: x for idx, x in enumerate(glob('inputs/*.csv') + glob('inputs/*.csv.gz') + glob('inputs/*.xes'), start=1)}
         
         for key in logs.keys():
             dispatcher.utter_message(text=json.dumps({key : logs[int(key)]}))
@@ -47,7 +47,7 @@ class ValidateChooseLogForm(FormValidationAction):
     @staticmethod
     def logs_db() -> List[Text]:
 
-        logs = {idx: x for idx, x in enumerate(glob('inputs/*.csv') + glob('inputs/*.csv.gz'), start=1)}
+        logs = {idx: x for idx, x in enumerate(glob('inputs/*.csv') + glob('inputs/*.csv.gz') + glob('inputs/*.xes'), start=1)}
         return logs
 
     def validate_log(

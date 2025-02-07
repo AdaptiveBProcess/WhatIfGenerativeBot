@@ -10,7 +10,9 @@ import subprocess
 import shutil
 import os
 import glob
+
 class ActionDeclarativeActionRules(Action):
+    
     def name(self) -> Text:
         return "action_declarative_action_rules"
 
@@ -24,50 +26,23 @@ class ActionDeclarativeActionRules(Action):
         elif option_selected == "Both":
             model=tracker.get_slot("comparison_scenario")
         else:
-            print("how")
+            print("No way this gets here")
         #print(model)
-        with open('declarative/DeclarativeProcessSimulation/GenerativeLSTM/rules.ini', 'w') as f:
+        with open('DeclarativeProcessSimulation/GenerativeLSTM/rules.ini', 'w') as f:
             f.write("# Production\n")
             f.write("[RULES]\n")
             f.write(f"path =  {rule}\n")
             f.write("variation = =1\n")
-        destination_path = 'declarative/DeclarativeProcessSimulation/GenerativeLSTM/input_files'
+        destination_path = 'DeclarativeProcessSimulation/GenerativeLSTM/input_files'
         shutil.copy(event_log, destination_path)           
         env_name='deep_generator'
-        #TODO: Include all original chatbot rules (Parameters)
-        #TODO: UI (reusar)
-        #TODO: Ajustar validaciones del declarative
-        #TODO: Mostrar metricas en una grafica
-
-        #TODO: Varias reglas para el declarative!!!!
-        #TODO: Definir los cambios 
-        #TODO: Halucinar una vez cada regla            
-        #TODO: Variation no tiene funcionalidad
-        #TODO: SIMOD puede llamarse 2 veces
-        #TODO: La entrada del chatbot es un modelo de simulación ASIS, es el que entrega SIMOD.
-        #TODO: Visualizar y comparar los modelos , e integrar gráficas
-        #Este codigo cambia en los archivos del codigo los valores necesarios para que funcione
         dv.ChangeModelNameTraining(event_log)
-        #mandar el modelo a alucinar (Mas o menos una hora)
-        #script_path = "declarative/DeclarativeProcessSimulation/dg_training.py"
-        #subprocess.call(["python", script_path])
         log_name=os.path.basename(event_log)
-        directory='declarative/DeclarativeProcessSimulation/GenerativeLSTM/output_files'
+        directory='DeclarativeProcessSimulation/GenerativeLSTM/output_files'
         dv.ReturnFolderName(directory)
-        dv.ChangeModelName(log_name)
-        dir_path = 'inputs/demand/models/'
-        files = glob.glob(dir_path + '*')
-        file_path = max(files, key=os.path.getctime)
-        #file_name = os.path.basename(files_path)
-        file_name_without_extension = os.path.splitext(os.path.basename(file_path))[0]
-        if option_selected == "Flux":
-            settings=f"    settings['asis_bpmn_path'] = os.path.join('GenerativeLSTM','input_files', 'simod', settings['file'] + '.bpmn')"
-            dv.ChangeModelNameDeclarative(settings)
-        elif option_selected == "Both":
-            settings=f"    settings['asis_bpmn_path'] = os.path.join('GenerativeLSTM','input_files', 'simod', '{file_name_without_extension}' + '.bpmn')"
-            dv.ChangeModelNameDeclarative(settings)             
-        script_path = "declarative\DeclarativeProcessSimulation\dg_prediction.py"
-        command=f'python {script_path}'
+        dv.ChangeModelName(log_name)    
+        script_path = "DeclarativeProcessSimulation\dg_prediction.py"
+        command=f'python {script_path} --config .\prediction.yml'
         subprocess.Popen(f'conda run -n {env_name} {command}', shell=True)
         dispatcher.utter_message(text='Process running in background, you will see new files on declarative\DeclarativeProcessSimulation\output_files when finishes')
         return []

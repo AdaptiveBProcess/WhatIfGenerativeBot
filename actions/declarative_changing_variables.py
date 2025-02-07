@@ -10,7 +10,7 @@ def main(argv):
 def ChangeModelNameTraining(model):
     #model='PurchasingExample.xes'
     #print(model)
-    file_to_modify = 'declarative\DeclarativeProcessSimulation\dg_training.py'
+    file_to_modify = 'DeclarativeProcessSimulation\dg_training.py'
     line_number=42
     with fileinput.FileInput(file_to_modify, inplace=True) as file:
             for i, line in enumerate(file, start=1):
@@ -21,7 +21,7 @@ def ChangeModelNameTraining(model):
 def ChangeModelName(model):
     #model='PurchasingExample.xes'
     #print(model)
-    file_to_modify = 'declarative\DeclarativeProcessSimulation\dg_prediction.py'
+    file_to_modify = 'DeclarativeProcessSimulation\dg_prediction.py'
     line_number=139
     with fileinput.FileInput(file_to_modify, inplace=True) as file:
             for i, line in enumerate(file, start=1):
@@ -32,7 +32,7 @@ def ChangeModelName(model):
 def ChangeModelNameDeclarative(model):
     #model='PurchasingExample.xes'
     #print(model)
-    file_to_modify = 'declarative\DeclarativeProcessSimulation\dg_prediction.py'
+    file_to_modify = 'DeclarativeProcessSimulation\dg_prediction.py'
     line_number=112
     with fileinput.FileInput(file_to_modify, inplace=True) as file:
             for i, line in enumerate(file, start=1):
@@ -48,7 +48,7 @@ def ReturnFolderName(directory):
     most_recent_folder = max(folders, key=os.path.getctime)
     #print(os.path.basename(os.path.normpath(most_recent_folder)))
     folder = os.path.basename(os.path.normpath(most_recent_folder))
-    file_to_modify = 'declarative\DeclarativeProcessSimulation\dg_prediction.py'
+    file_to_modify = 'DeclarativeProcessSimulation\dg_prediction.py'
     line_number=158
     with fileinput.FileInput(file_to_modify, inplace=True) as file:
         for i, line in enumerate(file, start=1):
